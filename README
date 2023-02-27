@@ -30,11 +30,11 @@ docker run --name test -p 8080:80 -d escw0rm/alpine-nginx-php-fpm:latest
 * `ANOTHER_VAR` - More Description
 * `YOU_GET_THE_IDEA` - And another
 
-#### Volumes (COMING SOON)
+#### Volumes
 
-* `/your/file/location` - File location
+* `/your/file/location:/var/www/localhost/htdocs` - File location
 
-#### Useful File Locations (COMING SOON)
+#### Useful File Locations
 
 * `/var/www/localhost/htdocs` - Web folder
   
@@ -46,7 +46,7 @@ docker run --name test -p 8080:80 -d escw0rm/alpine-nginx-php-fpm:latest
 
 ## Find Us (COMING SOON)
 
-* [GitHub](https://gitlab.simonnilsson.com)
+* [GitHub](https://github.com/escw0rm)
 * [HomePage](https://simonnilsson.com)
 
 ## Contributing (COMING SOON)
