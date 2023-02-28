@@ -1,5 +1,9 @@
 FROM alpine:latest
 
+RUN set -x \
+    && addgroup --system --gid 101 nginx \
+    && adduser -S -G nginx -H -s /sbin/nologin -u 101 -h /nonexistent -g "nginx user" nginx
+
 RUN apk update && apk upgrade \
     && apk add nginx \
     && apk add --no-cache --upgrade bash \
@@ -27,9 +31,17 @@ COPY .docker/nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
 RUN chown -R nginx:nginx /var/www/localhost/htdocs \
     && chmod 755 /var/www/localhost/htdocs
 
+# forward request and error logs to docker log collector
+RUN ln -s /dev/stdout /var/log/nginx/access.log \
+    && ln -s /dev/stderr /var/log/nginx/error.log \
+    && ln -s /dev/stderr /var/log/php81/error.log
+
 EXPOSE 443
 EXPOSE 80
 
 ADD .docker/start.sh /
 RUN chown nginx:nginx /start.sh
+
+STOPSIGNAL SIGTERM
+
 CMD ["sh", "/start.sh"]
