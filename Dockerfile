@@ -11,6 +11,10 @@ RUN apk update && apk upgrade \
     && apk add php-gd php-mysqli php-zlib php-curl php-mbstring php-intl php-xml php-phar icu-dev php-pdo php-gettext php-session php-pdo_mysql php-sqlite3 php-pdo_sqlite php-dom php-simplexml \
     && mkdir -p /run/nginx
 
+RUN mkdir -p /var/run/nginx /var/log/nginx /var/cache/nginx && \
+        chown -R nginx:0 /var/run/nginx /var/log/nginx /var/cache/nginx /var/lib/nginx  && \
+        chmod -R g=u /var/run/nginx /var/log/nginx /var/cache/nginx /var/lib/nginx
+
 COPY .docker/default.conf /etc/nginx/http.d/default.conf
 
 COPY .docker/index.php /var/www/localhost/htdocs/index.php
@@ -35,8 +39,8 @@ RUN ln -s /dev/stdout /var/log/nginx/access.log \
     && ln -s /dev/stderr /var/log/nginx/error.log \
     && ln -s /dev/stderr /var/log/php81/error.log
 
-EXPOSE 443
-EXPOSE 80
+EXPOSE 8543
+EXPOSE 8580
 
 ADD .docker/start.sh /
 RUN chown nginx:nginx /start.sh
