@@ -31,7 +31,6 @@ COPY .docker/nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
 RUN chown -R nginx:nginx /var/www/localhost/htdocs \
     && chmod 755 /var/www/localhost/htdocs
 
-# forward request and error logs to docker log collector
 RUN ln -s /dev/stdout /var/log/nginx/access.log \
     && ln -s /dev/stderr /var/log/nginx/error.log \
     && ln -s /dev/stderr /var/log/php81/error.log
