@@ -39,8 +39,8 @@ RUN ln -s /dev/stdout /var/log/nginx/access.log \
     && ln -s /dev/stderr /var/log/nginx/error.log \
     && ln -s /dev/stderr /var/log/php81/error.log
 
-EXPOSE 8543
-EXPOSE 8580
+EXPOSE 443
+EXPOSE 80
 
 ADD .docker/start.sh /
 RUN chown nginx:nginx /start.sh
