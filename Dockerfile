@@ -17,6 +17,8 @@ RUN mkdir -p /var/run/nginx /var/log/nginx /var/cache/nginx && \
 
 COPY .docker/default.conf /etc/nginx/http.d/default.conf
 
+COPY .docker/www.conf /etc/php81/php-fpm.d/www.conf
+
 COPY .docker/index.php /var/www/localhost/htdocs/index.php
 
 COPY .docker/php-fpm.conf /etc/php81/php-fpm.conf
